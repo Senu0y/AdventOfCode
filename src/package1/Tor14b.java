@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
-
 public class Tor14b {
 
 	// static ArrayList<Integer> memoryInt;
@@ -31,15 +30,14 @@ public class Tor14b {
 			ArrayList<String> mem = new ArrayList<String>();
 			while (scani.hasNext()) {
 				mem.add(scani.nextLine());
-			}
 
-			mem.remove(0);
+					mem.remove(0);
 
 			for (String current : mem) {
 				calculater(mask, current);
 			}
 			// System.out.println(mem.toString());
-
+			}
 		}
 		long sum = 0l;
 		int counter = 0;
@@ -55,7 +53,7 @@ public class Tor14b {
 
 	static HashSet<String> xCoder(String mask, String memory) {
 		HashSet<String> marlene = new HashSet<String>();
-		
+
 		if (!memory.contains("X")) {
 			marlene.add(memory);
 			marlene.size();
@@ -63,15 +61,15 @@ public class Tor14b {
 		}
 		for (int i = 0; i < mask.length(); i++) {
 			if (memory.charAt(i) == 'X') {
-			//	System.out.println("v "+memory);
+				// System.out.println("v "+memory);
 				String mem1 = memory.substring(0, i) + '1' + memory.substring(i + 1);
-				System.out.println("n "+mem1);
+				System.out.println("n " + mem1);
 				marlene.addAll(xCoder(mask, mem1));
-				
+
 				String mem2 = memory.substring(0, i) + '0' + memory.substring(i + 1);
 				marlene.addAll(xCoder(mask, mem2));
-					break;	
-		}		
+				break;
+			}
 		}
 		System.out.println(marlene.size());
 		return marlene;
@@ -99,12 +97,12 @@ public class Tor14b {
 		}
 
 		System.out.println(xCoder(mask, memoryBin).toString());
-		HashSet<String> danny= xCoder(mask, memoryBin);
-		for(String current:danny ) {
-			
+		HashSet<String> danny = xCoder(mask, memoryBin);
+		for (String current : danny) {
+
 			hashi.put(Long.parseLong(current, 2), number);
 		}
-		
+
 		/*
 		 * memoryBin = sb.toString(); System.out.println("n " + memoryBin); number =
 		 * Long.parseLong(memoryBin, 2); bigArr[memory] = number;
