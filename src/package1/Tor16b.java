@@ -108,7 +108,7 @@ public class Tor16b {
 		// System.out.println(Arrays.toString(howoften));
 		// System.out.println(Arrays.deepToString(canFit));
 		// System.out.println(sum);// 26869
-
+		System.out.println((long)73*137*151*67*79*107);
 	}
 
 	static boolean isInRange(String[] s, int number) {
