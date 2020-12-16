@@ -7,7 +7,6 @@ public class Tor15 {
 	public static void main(String[] args) {
 
 		int[] input = { 9, 3, 1, 0, 8, 4 };
-		// int[] input = {0,3,6};
 		HashMap<Integer, Integer> hashi = new HashMap<Integer, Integer>();
 
 		for (int i = 0; i < input.length - 1; i++) {
@@ -18,7 +17,6 @@ public class Tor15 {
 		int newNumber = 0;
 		for (int i = input.length + 1; i < 30000001; i++) {
 
-			// System.out.println(lastnumber+" hashi "+hashi.get(lastnumber));
 			if (hashi.containsKey(lastnumber)) {
 
 				newNumber = i - 1 - hashi.get(lastnumber);
@@ -27,7 +25,6 @@ public class Tor15 {
 			} else {
 				hashi.put(lastnumber, i - 1);
 				newNumber = 0;
-
 			}
 			lastnumber = newNumber;
 		}
