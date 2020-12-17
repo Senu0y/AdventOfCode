@@ -21,7 +21,7 @@ public class Tor17b {
 				gitter[i][j] = line.charAt(j);
 			}
 		}
-		int grosse = 30;
+		int grosse = 50;
 		boolean[][][][] gitter4d = new boolean[grosse * 2][grosse * 2][gitter.length + grosse][gitter[0].length
 				+ grosse];
 
@@ -81,18 +81,6 @@ public class Tor17b {
 		for (int i = 0; i < gitter4d.length; i++) {
 		}
 		System.out.println(counter);
-
-	}
-
-	static boolean[][][] cloner(boolean[][][] gitter) {
-		boolean[][][] gitterclone = gitter.clone();
-		for (int i = 0; i < gitter.length; i++) {
-			for (int j = 0; j < gitter[0].length; j++) {
-				gitterclone[i][j] = gitter[i][j].clone();
-			}
-		}
-
-		return gitterclone;
 
 	}
 

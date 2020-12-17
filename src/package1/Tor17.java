@@ -11,7 +11,7 @@ public class Tor17 {
 		File file = new File("tor17input");
 		Scanner scani = new Scanner(file);
 		String[] input = scani.useDelimiter("\\A").next().split("\\n");
-
+		scani.close();
 		char[][] gitter = new char[input.length][input[0].length() - 1];
 
 		for (int i = 0; i < gitter.length; i++) {
@@ -54,7 +54,6 @@ public class Tor17 {
 
 							}
 						}
-
 					}
 
 				}
@@ -79,21 +78,19 @@ public class Tor17 {
 
 	}
 
-	static boolean[][][] cloner(boolean[][][] gitter) {
-		boolean[][][] gitterclone = gitter.clone();
-		for (int i = 0; i < gitter.length; i++) {
-			for (int j = 0; j < gitter[0].length; j++) {
-				gitterclone[i][j] = gitter[i][j].clone();
-			}
-		}
-
-		return gitterclone;
-
-	}
+	/*
+	 * static boolean[][][] cloner(boolean[][][] gitter) { boolean[][][] gitterclone
+	 * = gitter.clone(); for (int i = 0; i < gitter.length; i++) { for (int j = 0; j
+	 * < gitter[0].length; j++) { gitterclone[i][j] = gitter[i][j].clone(); // array
+	 * cloner für Zukunft } }
+	 * 
+	 * return gitterclone;
+	 * 
+	 * }
+	 */
 
 	static int nachAktiv(int z, int i, int j, boolean[][][] gitter) {
 		int counter = 0;
-
 		int[] ar = { -1, 0, 1 };
 		int[] br = { -1, 0, 1 };
 		int[] cr = { -1, 0, 1 };
@@ -119,9 +116,6 @@ public class Tor17 {
 				}
 			}
 		}
-
 		return counter;
-
 	}
-
 }
