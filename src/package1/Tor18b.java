@@ -13,19 +13,14 @@ public class Tor18b {
 		String[] input = scani.useDelimiter("\\A").next().split("\\n");
 		scani.close();
 		Long sum = 0l;
-		System.out.println(input[0]);
-
+		
 		for (int i = 0; i < input.length; i++) {
 			sum += calculater(modifier(input[i]));
 		}
-		System.out.println(modifier("2 * 3 + (4 * 5)"));
-		System.out.println(calculater(modifier("2 * 3 + (4 * 5)")));
 		System.out.println(sum);
-		// danny 314455761823725
 	}
 
 	static String modifier(String line) {
-		
 		line = line.replaceAll("\\)", ")))");
 		line = line.replaceAll("\\(", "(((");
 		line = line.replaceAll(" \\* ", ")) * ((");
@@ -34,12 +29,6 @@ public class Tor18b {
 		return line;
 	}
 
-	/*
-	 * static int parHelper(String s) { int parSum = 1; int i = 0; char[] l =
-	 * s.toCharArray(); while (parSum != 0 && i < s.length()) { if (l[i] == '(')
-	 * parSum++; else if (l[i] == ')') parSum--; i++; } return i - 1; }
-	 */
-
 	static Long calculater(String line) {
 		char[] l = line.strip().toCharArray();
 		Long calculation = 0l;
@@ -47,9 +36,7 @@ public class Tor18b {
 		if (l[i] == ')') {
 			i--;
 			calculation = calculater(line.substring(0, i + 1));
-
 			int parSum = 1;
-
 			while (parSum != 0) {
 				if (l[i] == ')')
 					parSum++;
