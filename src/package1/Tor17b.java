@@ -11,7 +11,7 @@ public class Tor17b {
 		File file = new File("tor17input");
 		Scanner scani = new Scanner(file);
 		String[] input = scani.useDelimiter("\\A").next().split("\\n");
-
+		scani.close();
 		char[][] gitter = new char[input.length][input[0].length() - 1];
 
 		for (int i = 0; i < gitter.length; i++) {
@@ -21,7 +21,7 @@ public class Tor17b {
 				gitter[i][j] = line.charAt(j);
 			}
 		}
-		int grosse = 50;
+		int grosse = 30;
 		boolean[][][][] gitter4d = new boolean[grosse * 2][grosse * 2][gitter.length + grosse][gitter[0].length
 				+ grosse];
 
@@ -36,21 +36,21 @@ public class Tor17b {
 		boolean[][][][] gitter4dnew;
 		for (int j3 = 0; j3 < 6; j3++) {
 			gitter4dnew = new boolean[grosse * 2][grosse * 2][gitter.length + grosse][gitter[0].length + grosse];
-			
+
 			for (int j4 = 0; j4 < gitter4d.length; j4++) {
 				for (int j2 = 0; j2 < gitter4d[0].length; j2++) {
 					for (int i = 0; i < gitter4d[0][0].length; i++) {
 						for (int j = 0; j < gitter4d[0][0][0].length; j++) {
 
 							if (gitter4d[j4][j2][i][j]) {
-								int neigh = nachAktiv(j4,j2, i, j, gitter4d);
+								int neigh = nachAktiv(j4, j2, i, j, gitter4d);
 								if (neigh == 2 || neigh == 3) {
 
 									gitter4dnew[j4][j2][i][j] = true;
 									continue;
 								}
 							} else {
-								if (nachAktiv(j4,j2, i, j, gitter4d) == 3) {
+								if (nachAktiv(j4, j2, i, j, gitter4d) == 3) {
 
 									gitter4dnew[j4][j2][i][j] = true;
 
@@ -65,7 +65,7 @@ public class Tor17b {
 			gitter4d = gitter4dnew;
 		}
 		int counter = 0;
-		for (int j3 = 0; j3 <gitter4d.length ; j3++) {
+		for (int j3 = 0; j3 < gitter4d.length; j3++) {
 			for (int j2 = 0; j2 < gitter4d[0].length; j2++) {
 				for (int i = 0; i < gitter4d[0][0].length; i++) {
 					for (int j = 0; j < gitter4d[0][0][0].length; j++) {
