@@ -15,8 +15,7 @@ public class Tor18a {
 		for (int i = 0; i < input.length; i++) {
 			sum += calculater(input[i]);
 		}
-
-		// 8298263963837 corrwect
+		// 8298263963837 correct
 		System.out.println("SUM " + sum);
 	}
 
