@@ -14,7 +14,7 @@ public class Tor19 {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		File file = new File("tor19input");
+		File file = new File("Tor19input");
 		Scanner scani = new Scanner(file);
 		String[] input = scani.useDelimiter("\\A").next().split("\\n");
 		hashimapi = new HashMap<Integer, String>();
@@ -32,10 +32,36 @@ public class Tor19 {
 			data[j - i - 1] = input[j].strip();
 		}
 
+		for (int j = 0; j < hashimapi.size(); j++) {
+			elefant.add(new ArrayList<String>());
+		}
+
 //		System.out.println(hashimapi.get(108));
 //		System.out.println(Arrays.deepToString(rulemaker(hashimapi.get(108))));
-		System.out.println(taucher(rulemaker(hashimapi.get(0))));
+		
+		ArrayList<String> output =taucher(rulemaker(hashimapi.get(0)), 0);
+		//System.out.println(elefant.get(0).toString());
+		HashSet<String> result= new HashSet<String>();
+		for (String current: output) {
+			result.add(current);
+		}
+		String s=result.toString();
 
+		//System.out.println(result.toString());
+		//System.out.println(elefant.get(0).get(0));
+		//System.out.println(elefant.get(0).get(100));
+		
+		//System.out.println(Arrays.deepToString(rulemaker(hashimapi.get(78))));
+		int couter=0;
+		for (int j = 0; j < data.length; j++) {
+			
+			if(result.contains(data[j])) {
+				couter++;
+			}
+			
+		}
+		System.out.println(couter);
+		System.out.println(elefant.get(8).size());
 	}
 
 	static int[][] rulemaker(String s) {
@@ -70,7 +96,7 @@ public class Tor19 {
 		}
 
 		if (rules2[1].split(" ").length != 1) {
-			output[1][1] = Integer.parseInt(rules2[0].split(" ")[1]);
+			output[1][1] = Integer.parseInt(rules2[1].split(" ")[1]);
 		} else {
 			output[1][1] = 0;
 		}
@@ -88,26 +114,37 @@ public class Tor19 {
 
 	static HashSet<String> allekombis = new HashSet<String>();
 
-	static ArrayList<String> taucher(int[][] regel) {
+	static ArrayList<ArrayList<String>> elefant = new ArrayList<ArrayList<String>>();
+
+	static ArrayList<String> taucher(int[][] regel, int nummer) {
 		int[] links = regel[0];
 		int[] rechts = regel[1];
 		ArrayList<String> fertigL = new ArrayList<String>();
 		ArrayList<String> fertigR = new ArrayList<String>();
 		ArrayList<String> ganzFertig = new ArrayList<String>();
 
+		if (!elefant.get(nummer).isEmpty()) {
+			//System.out.println("hier");
+			return elefant.get(nummer);
+		}
+		
 		if (links[0] == -1 || links[0] == -2) {
 			if (links[0] == -1) {
 				ganzFertig.add("a");
 			} else {
 				ganzFertig.add("b");
 			}
+			
+			elefant.set(nummer,ganzFertig);
+			
+			
 			return ganzFertig;
 		}
-		
-		ArrayList<String> danny = taucher(rulemaker(hashimapi.get(links[0])));
+
+		ArrayList<String> danny = taucher(rulemaker(hashimapi.get(links[0])), links[0]);
 
 		if (links[1] != 0) {
-			ArrayList<String> leon = taucher(rulemaker(hashimapi.get(links[1])));
+			ArrayList<String> leon = taucher(rulemaker(hashimapi.get(links[1])), links[1]);
 			for (String current : danny) {
 				for (String curr : leon) {
 					fertigL.add(current + curr);
@@ -119,27 +156,31 @@ public class Tor19 {
 
 		if (rechts != null) {
 
-			ArrayList<String> peter = taucher(rulemaker(hashimapi.get(links[0])));
-			if (links[1] != 0) {
-				ArrayList<String> leon = taucher(rulemaker(hashimapi.get(links[1])));
+			ArrayList<String> peter = taucher(rulemaker(hashimapi.get(rechts[0])), rechts[0]);
+			if (rechts[1] != 0) {
+				ArrayList<String> leon = taucher(rulemaker(hashimapi.get(rechts[1])), rechts[1]);
 				for (String current : peter) {
 					for (String curr : leon) {
-						fertigL.add(current + curr);
+
+						fertigR.add(current + curr);
 					}
 				}
 			} else {
 				fertigR = peter;
 			}
 
-			for (String current : fertigL) {
-				for (String curr : fertigR) {
-					ganzFertig.add(current + curr);
-				}
-			}
+					ganzFertig.addAll(fertigL);
+					ganzFertig.addAll(fertigR);
+					
+				
+			
 		} else {
+
 			ganzFertig = fertigL;
 		}
-
+//		elefant.get(nummer).addAll(ganzFertig);
+		elefant.set(nummer,ganzFertig);
+//		System.out.println(nummer+"el "+ elefant.get(nummer));
 		return ganzFertig;
 	}
 
@@ -256,8 +297,8 @@ public class Tor19 {
 		return hashi;
 	}
 
-	static LinkedList<String> stringMaker(int[][] inp) {
-		int a = 106;
+	static LinkedList<String> stringMaker(int[][] inp) {		// loop 1: 42 31 | 42 11 31
+		int a = 106;											// : 42 | 42 8
 		int b = 12;
 		LinkedList<String> list = new LinkedList<String>();
 		System.out.println("hier");
